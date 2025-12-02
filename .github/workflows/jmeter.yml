@@ -17,15 +17,15 @@ jobs:
       - name: Run JMeter using Docker
         run: |
           docker run --rm \
-            -v "$PWD:/jmeter" \
-            -w /jmeter \
-            justb4/jmeter:5.5 \
-            jmeter -n \
-            -t tests/JuiceShop.jmx \
-            -l results/results.jtl \
-            -j results/jmeter.log \
-            -Jthreads=1 \
-            -Jduration=120
+  -v "${{ github.workspace }}:/workspace" \
+  -w /workspace \
+  justb4/jmeter:5.5 \
+  jmeter -n \
+    -t tests/JuiceShop.jmx \
+    -l results/results.jtl \
+    -j results/jmeter.log \
+    -Jduration=120 \
+    -Jthreads=1
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
