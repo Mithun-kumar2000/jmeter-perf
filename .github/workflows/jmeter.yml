@@ -1,4 +1,4 @@
-name: Run JMeter Test
+name: Run JMeter Test 
 
 on:
   workflow_dispatch:
