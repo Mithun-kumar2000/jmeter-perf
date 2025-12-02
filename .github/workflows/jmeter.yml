@@ -1,1 +1,34 @@
+name: Run JMeter Test
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  jmeter:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create results folder
+        run: mkdir -p results
+
+      - name: Run JMeter using Docker
+        run: |
+          docker run --rm \
+            -v "${{ github.workspace }}:/workspace" \
+            -w /workspace \
+            justb4/jmeter:5.5 \
+            -n -t tests/my-test.jmx \
+            -l results/results.jtl \
+            -j results/jmeter.log
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        with:
+          name: jmeter-results
+          path: results
 
