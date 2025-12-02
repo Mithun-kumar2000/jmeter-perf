@@ -24,7 +24,7 @@ jobs:
             justb4/jmeter:5.5 \
             -n -t tests/JuiceShop.jmx \
             -l results/results.jtl \
-            -j results/jmeter.log
+            -j results/jmeter.log \
             -Jduration=60
 
       - name: Upload test results
