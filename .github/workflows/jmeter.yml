@@ -22,7 +22,7 @@ jobs:
             -v "${{ github.workspace }}:/workspace" \
             -w /workspace \
             justb4/jmeter:5.5 \
-            -n -t tests/my-test.jmx \
+            -n -t tests/JuiceShop.jmx \
             -l results/results.jtl \
             -j results/jmeter.log
 
