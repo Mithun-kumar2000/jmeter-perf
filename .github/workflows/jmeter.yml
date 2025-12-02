@@ -2,7 +2,7 @@ name: Run JMeter Test
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   workflow_dispatch:
 
 jobs:
@@ -22,11 +22,14 @@ jobs:
             -v "${{ github.workspace }}:/workspace" \
             -w /workspace \
             justb4/jmeter:5.5 \
-            -n -t tests/JuiceShop.jmx \
+            jmeter \
+            -n \
+            -t tests/JuiceShop.jmx \
             -l results/results.jtl \
             -j results/jmeter.log \
             -Jduration=120 \
             -Jthreads=1
+
       - name: Upload test results
         uses: actions/upload-artifact@v4
         with:
