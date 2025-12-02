@@ -25,11 +25,10 @@ jobs:
             -n -t tests/JuiceShop.jmx \
             -l results/results.jtl \
             -j results/jmeter.log \
-            -Jduration=60
-
+            -Jduration=120 \
+            -Jthreads=1
       - name: Upload test results
         uses: actions/upload-artifact@v4
         with:
           name: jmeter-results
           path: results
-
