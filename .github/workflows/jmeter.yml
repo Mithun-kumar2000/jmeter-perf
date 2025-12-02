@@ -1,8 +1,6 @@
 name: Run JMeter Test
 
 on:
-  push:
-    branches: [ "main" ]
   workflow_dispatch:
 
 jobs:
@@ -19,16 +17,15 @@ jobs:
       - name: Run JMeter using Docker
         run: |
           docker run --rm \
-            --entrypoint jmeter \
-            -v "${{ github.workspace }}:/workspace" \
-            -w /workspace \
+            -v "$PWD:/jmeter" \
+            -w /jmeter \
             justb4/jmeter:5.5 \
-            -n \
+            jmeter -n \
             -t tests/JuiceShop.jmx \
             -l results/results.jtl \
             -j results/jmeter.log \
-            -Jduration=120 \
-            -Jthreads=1
+            -Jthreads=1 \
+            -Jduration=120
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
